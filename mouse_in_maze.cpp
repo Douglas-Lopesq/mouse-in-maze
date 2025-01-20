@@ -8,30 +8,30 @@ using namespace std;
 
 class Maze {
 private:
-    vector<string> maze; // Representação do labirinto
-    const char wall = '1'; // Paredes externas
+    vector<string> maze;
+    const char wall = '1';
 
-    // Adiciona paredes externas ao redor do labirinto
+    //cria as paredes externas
     void loadWalls() {
-        string wallRow(maze[0].size() + 2, wall); // Linha completa de paredes
+        string wallRow(maze[0].size() + 2, wall);
         for (auto& row : maze) {
-            row = wall + row + wall; // Adiciona paredes laterais
+            row = wall + row + wall;
         }
-        maze.insert(maze.begin(), wallRow); // Adiciona a linha superior de paredes
-        maze.push_back(wallRow);           // Adiciona a linha inferior de paredes
+        maze.insert(maze.begin(), wallRow);
+        maze.push_back(wallRow);
     }
 
 public:
-    // Carrega o labirinto de um fluxo de entrada (arquivo ou terminal)
+    // Carrega o labirinto pelo arquivo .txt
     void loadMaze(istream& input) {
         string line;
         while (getline(input, line)) {
-            maze.push_back(line); // Adiciona cada linha ao vetor
+            maze.push_back(line);
         }
-        loadWalls(); // Adiciona as paredes externas após a leitura
+        loadWalls();
     }
 
-    // Lê o labirinto diretamente do terminal
+    // LÃª o labirinto do terminal
     void loadMazeFromTerminal() {
         cout << "Insira o labirinto linha por linha. Digite uma linha vazia para terminar:\n";
         string line;
@@ -52,22 +52,22 @@ public:
 };
 
 int main() {
-    Maze maze; // Criação do objeto da classe Maze
+    Maze maze;
     int option;
 
-    // Menu para o usuário escolher a origem do labirinto
+    // Menu inicial
     cout << "<!Bem vindo a Mouse in Maze!>\n";
     cout << "1. Construa  seu labirinto\n";
     cout << "2. Carregue um labirinto ja construido\n";
     cout << "Digite sua opcao: ";
     cin >> option;
-    cin.ignore(); // Limpa o buffer do teclado
+    cin.ignore();
 
     if (option == 1) {
         // Insere o labirinto diretamente pelo terminal
         maze.loadMazeFromTerminal();
     } else if (option == 2) {
-        // Lê o labirinto de um arquivo
+        // LÃª o labirinto de um arquivo
         string filename;
         cout << "Digite o nome do arquivo: ";
         getline(cin, filename);
@@ -81,7 +81,7 @@ int main() {
         maze.loadMaze(file); // Carrega o labirinto a partir do arquivo
         file.close();
     } else {
-        cout << "Opção inválida!\n";
+        cout << "OpÃ§Ã£o invÃ¡lida!\n";
         return 1;
     }
 
